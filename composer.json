@@ -1,0 +1,24 @@
+{
+  "name": "drd-plus/combat-actions",
+  "license": "MIT",
+  "type": "project",
+  "description": "Combat actions usable in Drd+",
+  "autoload": {
+    "psr-4": {
+      "DrdPlus\\": "DrdPlus/"
+    }
+  },
+  "require": {
+    "php": ">=7.0",
+    "drd-plus/codes": "dev-master",
+    "drd-plus/properties": "dev-master",
+    "drd-plus/skills": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~6.0",
+    "mockery/mockery": "~0.9",
+    "granam/exceptions-hierarchy": "~4.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
