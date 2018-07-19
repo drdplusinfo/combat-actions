@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DrdPlus\CombatActions;
 
 use DrdPlus\Codes\CombatActions\CombatActionCode;
@@ -51,11 +53,11 @@ class CombatActions extends StrictObject implements \IteratorAggregate, \Countab
     {
         $sanitizedCombatActionCodes = [];
         foreach ($combatActionCodes as $combatActionCode) {
-            if (in_array((string)$combatActionCode, CombatActionCode::getPossibleValues(), true)) {
+            if (\in_array((string)$combatActionCode, CombatActionCode::getPossibleValues(), true)) {
                 $sanitizedCombatActionCodes[] = CombatActionCode::getIt($combatActionCode);
-            } elseif (in_array((string)$combatActionCode, MeleeCombatActionCode::getPossibleValues(), true)) {
+            } elseif (\in_array((string)$combatActionCode, MeleeCombatActionCode::getPossibleValues(), true)) {
                 $sanitizedCombatActionCodes[] = MeleeCombatActionCode::getIt($combatActionCode);
-            } elseif (in_array((string)$combatActionCode, RangedCombatActionCode::getPossibleValues(), true)) {
+            } elseif (\in_array((string)$combatActionCode, RangedCombatActionCode::getPossibleValues(), true)) {
                 $sanitizedCombatActionCodes[] = RangedCombatActionCode::getIt($combatActionCode);
             } else {
                 throw new Exceptions\UnknownCombatActionCode(
@@ -97,7 +99,7 @@ class CombatActions extends StrictObject implements \IteratorAggregate, \Countab
         if (count($forMeleeOnly) > 0 && count($forRangedOnly) > 0) {
             throw new Exceptions\IncompatibleCombatActions(
                 'There are combat actions usable only for melee and another only for ranged, which prohibits their joining;'
-                . ' melee: ' . implode(', ', $forMeleeOnly) . '; ranged: ' . implode(', ', $forRangedOnly)
+                . ' melee: ' . \implode(', ', $forMeleeOnly) . '; ranged: ' . \implode(', ', $forRangedOnly)
             );
         }
     }
@@ -113,7 +115,7 @@ class CombatActions extends StrictObject implements \IteratorAggregate, \Countab
         $anotherCombatActionCodes = $combatActionCodes;
         foreach ($combatActionCodes as $combatActionCode) {
             /** @noinspection DisconnectedForeachInstructionInspection */
-            array_shift($anotherCombatActionCodes); // remove an item from beginning
+            \array_shift($anotherCombatActionCodes); // remove an item from beginning
             foreach ($anotherCombatActionCodes as $anotherCombatActionCode) {
                 /** @noinspection ExceptionsAnnotatingAndHandlingInspection */
                 if ($combatActionCode !== $anotherCombatActionCode
@@ -127,9 +129,9 @@ class CombatActions extends StrictObject implements \IteratorAggregate, \Countab
         if ($incompatiblePairs) {
             throw new Exceptions\IncompatibleCombatActions(
                 'There are incompatible combat actions: '
-                . implode(
+                . \implode(
                     ', ',
-                    array_map(
+                    \array_map(
                         function (array $incompatiblePair) {
                             return "'{$incompatiblePair[0]}' with '{$incompatiblePair[1]}'";
                         },
@@ -192,9 +194,9 @@ class CombatActions extends StrictObject implements \IteratorAggregate, \Countab
      */
     public function __toString()
     {
-        return implode(
+        return \implode(
             ',',
-            array_map(
+            \array_map(
                 function (CombatActionCode $combatActionCode) {
                     return $combatActionCode->getValue();
                 },
@@ -309,7 +311,7 @@ class CombatActions extends StrictObject implements \IteratorAggregate, \Countab
      */
     private function hasAction($combatActionCode): bool
     {
-        return array_key_exists((string)$combatActionCode, $this->combatActionCodes);
+        return \array_key_exists((string)$combatActionCode, $this->combatActionCodes);
     }
 
     /**

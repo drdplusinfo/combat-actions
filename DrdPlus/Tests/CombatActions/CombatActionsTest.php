@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DrdPlus\Tests\CombatActions;
 
 use DrdPlus\Codes\CombatActions\CombatActionCode;
@@ -14,7 +16,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_use_it()
+    public function I_can_use_it(): void
     {
         $combatActions = new CombatActions(
             $inputActions = [
@@ -31,7 +33,7 @@ class CombatActionsTest extends TestWithMockery
      * @param bool $areCompatible
      * @return \Mockery\MockInterface|Tables
      */
-    private function createTablesWithCombatActionsCompatibilityTable(array $expectedActionsToCombine, $areCompatible)
+    private function createTablesWithCombatActionsCompatibilityTable(array $expectedActionsToCombine, $areCompatible): Tables
     {
         $expectedActionsToCombine = array_map(
             function ($expectedActionToCombine) {
@@ -63,7 +65,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_codes()
+    public function I_can_get_codes(): void
     {
         $combatActions = new CombatActions(
             $expected = [
@@ -77,15 +79,15 @@ class CombatActionsTest extends TestWithMockery
         foreach ($combatActions->getCombatActionCodes() as $combatActionCode) {
             $collected[] = $combatActionCode->getValue();
         }
-        sort($expected);
-        sort($collected);
+        \sort($expected);
+        \sort($collected);
         self::assertSame($expected, $collected);
     }
 
     /**
      * @test
      */
-    public function I_can_iterate_through_them()
+    public function I_can_iterate_through_them(): void
     {
         $combatActions = new CombatActions(
             $expected = [
@@ -100,15 +102,15 @@ class CombatActionsTest extends TestWithMockery
         foreach ($combatActions as $combatActionCode) {
             $collected[] = $combatActionCode->getValue();
         }
-        sort($expected);
-        sort($collected);
+        \sort($expected);
+        \sort($collected);
         self::assertSame($expected, $collected);
     }
 
     /**
      * @test
      */
-    public function I_can_count_them()
+    public function I_can_count_them(): void
     {
         $combatActions = new CombatActions([], $this->createTablesWithCombatActionsCompatibilityTable([], true));
         self::assertCount(0, $combatActions);
@@ -127,7 +129,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_list_of_actions_as_string()
+    public function I_can_get_list_of_actions_as_string(): void
     {
         $combatActions = new CombatActions([], $this->createTablesWithCombatActionsCompatibilityTable([], true));
         self::assertSame('', (string)$combatActions);
@@ -146,7 +148,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_fight_number_modifier()
+    public function I_can_get_fight_number_modifier(): void
     {
         $combatActions = new CombatActions(
             $values = [
@@ -178,7 +180,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_attack_number_modifier()
+    public function I_can_get_attack_number_modifier(): void
     {
         $combatActions = new CombatActions(
             $genericValues = [
@@ -228,7 +230,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_base_of_wounds_modifier()
+    public function I_can_get_base_of_wounds_modifier(): void
     {
         $combatActions = new CombatActions(
             $values = [
@@ -252,7 +254,7 @@ class CombatActionsTest extends TestWithMockery
     /**
      * @test
      */
-    public function I_can_get_defense_number_modifier()
+    public function I_can_get_defense_number_modifier(): void
     {
         $combatActions = new CombatActions(
             $values = [
