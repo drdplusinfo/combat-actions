@@ -8,7 +8,7 @@ use DrdPlus\Codes\CombatActions\RangedCombatActionCode;
 use DrdPlus\CombatActions\CombatActions;
 use DrdPlus\Tables\Combat\Actions\CombatActionsCompatibilityTable;
 use DrdPlus\Tables\Tables;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class CombatActionsTest extends TestWithMockery
 {
@@ -35,7 +35,7 @@ class CombatActionsTest extends TestWithMockery
     private function createTablesWithCombatActionsCompatibilityTable(array $expectedActionsToCombine, $areCompatible): Tables
     {
         $expectedActionsToCombine = array_map(
-            function ($expectedActionToCombine) {
+            static function ($expectedActionToCombine) {
                 return (string)$expectedActionToCombine;
             },
             $expectedActionsToCombine
@@ -78,8 +78,8 @@ class CombatActionsTest extends TestWithMockery
         foreach ($combatActions->getCombatActionCodes() as $combatActionCode) {
             $collected[] = $combatActionCode->getValue();
         }
-        \sort($expected);
-        \sort($collected);
+        sort($expected);
+        sort($collected);
         self::assertSame($expected, $collected);
     }
 
@@ -101,8 +101,8 @@ class CombatActionsTest extends TestWithMockery
         foreach ($combatActions as $combatActionCode) {
             $collected[] = $combatActionCode->getValue();
         }
-        \sort($expected);
-        \sort($collected);
+        sort($expected);
+        sort($collected);
         self::assertSame($expected, $collected);
     }
 
@@ -341,7 +341,7 @@ class CombatActionsTest extends TestWithMockery
     public function I_can_not_create_it_with_unknown_code()
     {
         $this->expectException(\DrdPlus\CombatActions\Exceptions\UnknownCombatActionCode::class);
-        $this->expectExceptionMessageRegExp('~swimming_against_current~');
+        $this->expectExceptionMessageMatches('~swimming_against_current~');
         new CombatActions(['swimming_against_current'], Tables::getIt());
     }
 
@@ -363,7 +363,7 @@ class CombatActionsTest extends TestWithMockery
     public function I_can_not_combine_native_incompatible_actions()
     {
         $this->expectException(\DrdPlus\CombatActions\Exceptions\IncompatibleCombatActions::class);
-        $this->expectExceptionMessageRegExp("~'attack_on_disabled_opponent' with 'getting_up'~");
+        $this->expectExceptionMessageMatches("~'attack_on_disabled_opponent' with 'getting_up'~");
         new CombatActions(
             [CombatActionCode::ATTACK_ON_DISABLED_OPPONENT, CombatActionCode::GETTING_UP],
             $this->createTablesWithCombatActionsIncompatibilityTable()
@@ -391,7 +391,7 @@ class CombatActionsTest extends TestWithMockery
     public function I_can_not_use_non_integer_as_rounds_of_aiming()
     {
         $this->expectException(\DrdPlus\CombatActions\Exceptions\InvalidFormatOfRoundsOfAiming::class);
-        $this->expectExceptionMessageRegExp('~lifetime~');
+        $this->expectExceptionMessageMatches('~lifetime~');
         new CombatActions(
             [CombatActionCode::GETTING_UP, CombatActionCode::HANDOVER_ITEM],
             Tables::getIt(),
