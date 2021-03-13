@@ -1,23 +1,26 @@
 {
-    "name": "drdplus/combat-actions",
-    "license": "MIT",
-    "type": "library",
-    "description": "Combat actions usable in Drd+",
-    "autoload": {
-        "psr-4": {
-            "DrdPlus\\CombatActions\\": "CombatActions",
-            "DrdPlus\\Tests\\": "tests"
-        }
-    },
-    "require": {
-        "php": ">=7.3",
-        "drdplus/skills": "^2.0"
-    },
-    "require-dev": {
-        "roave/security-advisories": "dev-master",
-        "phpunit/phpunit": "^9.3",
-        "mockery/mockery": "^1.2",
-        "granam/exceptions-hierarchy": "^5.0",
-        "granam/test-with-mockery": "^2.0"
+  "name": "drdplus/combat-actions",
+  "license": "MIT",
+  "type": "library",
+  "description": "Combat actions usable in Drd+",
+  "autoload": {
+    "psr-4": {
+      "DrdPlus\\CombatActions\\": "CombatActions",
+      "DrdPlus\\Tests\\": "tests"
     }
+  },
+  "require": {
+    "php": ">=7.3",
+    "drdplus/skills": "^2.0"
+  },
+  "require-dev": {
+    "granam/exceptions-hierarchy": "^5.0",
+    "granam/test-with-mockery": "^2.0",
+    "mockery/mockery": "^1.4",
+    "phpunit/phpunit": "^9.5",
+    "roave/security-advisories": "dev-master"
+  },
+  "config": {
+    "sort-packages": true
+  }
 }
