@@ -9,12 +9,18 @@
       "DrdPlus\\Tests\\": "tests"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Granam\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/ExceptionsHierarchy",
+      "Granam\\Tests\\ExceptionsHierarchy\\": "vendor/granam/exceptions-hierarchy/tests/ExceptionsHierarchy"
+    }
+  },
   "require": {
     "php": ">=7.3",
-    "drdplus/skills": "^2.0"
+    "drdplus/skills": "^3.0"
   },
   "require-dev": {
-    "granam/exceptions-hierarchy": "^5.0",
+    "granam/exceptions-hierarchy": "^5.1",
     "granam/test-with-mockery": "^2.0",
     "mockery/mockery": "^1.4",
     "phpunit/phpunit": "^9.5",
